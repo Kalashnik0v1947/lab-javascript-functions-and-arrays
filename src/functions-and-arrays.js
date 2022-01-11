@@ -1,9 +1,9 @@
 // Iteration #1: Find the maximum
 function maxOfTwoNumbers(num1, num2) {
   if (num1 > num2) {
-    return num1
+    return num1;
   } else {
-    return num2
+    return num2;
   }
 }
 
@@ -14,36 +14,68 @@ function findLongestWord(arr) {
   if (arr.length === 0) return null;
 
   let max = arr[0].length;
-  arr.map(v => max = Math.max(max, v.length));
-  result = arr.filter(v => v.length == max);
-  return result
- }
- 
+  arr.map((v) => (max = Math.max(max, v.length)));
+  result = arr.find((v) => v.length == max);
+  return result;
+}
+
 // Iteration #3: Calculate the sum
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
 function sumNumbers(num) {
-  if (num.length === 0) return 0;
+  for (let i = 0; i < num.length; i++) {
+    if (num[i] !== 0 || num.length === 0) return 0;
+  }
+
+  if (num.length === 1) return num;
 
   let sum = 0;
   for (let i = 0; i < num.length; i++) {
-    sum += num[i]
-  } return sum
+    sum += num[i];
+  }
+  return sum;
 }
 
 // Iteration #3.1 Bonus:
+
 const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
 
 function sum(arr) {
-  const filteredArr = [];
-
   for (let i = 0; i < arr.length; i++) {
-    const filter = arr[i];
-    const dataType 
+    if (arr[i] == [[]] || arr[i] == [{}]) {
+      throw error;
+    }
   }
+
+  const totalSum = arr.reduce((sumSoFar, nextValue) => {
+    if (typeof nextValue === 'number' && isFinite(nextValue)) {
+      return sumSoFar + nextValue;
+    }
+
+    return sumSoFar;
+  }, 0);
+  return totalSum;
 }
 
-
+// function sum(mixedArr) {
+//   let sum = 0;
+//   for (let i = 0; i < mixedArr.length; i++) {
+//    if (typeof mixedArr[i] === 'object' || typeof mixedArr[i] === 'array') {
+//      throw "Unsupported data type sir or ma'am";
+//    }
+//    if (typeof mixedArr[i] === 'string') {
+//      mixedArr[i] = mixedArr[i].length;
+//    }
+//    if (typeof mixedArr[i] === true) {
+//      mixedArr[i] = 1;
+//    }
+//    if (typeof mixedArr[i] === false) {
+//      mixedArr[i] = 0;
+//    }
+//    sum += mixedArr[i]
+//   }
+//   return sum;
+// }
 
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
@@ -51,11 +83,10 @@ const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
 function averageNumbers() {}
 
-
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
-function averageWordLength() { }
+function averageWordLength() {}
 
 // Bonus - Iteration #4.1
 function avg() {}
@@ -75,16 +106,14 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
-
-
+function uniquifyArray(arr) {}
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
-
-
+function doesWordExist(arr, word) {
+  return arr.includes(word);
+}
 
 // Iteration #7: Count repetition
 const wordsCount = [
@@ -101,9 +130,16 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
+function howManyTimes(arr, word) {
+  let count = 0;
 
-
+  arr.forEach(function (val) {
+    if (val === word) {
+      count++;
+    }
+  });
+  return count;
+}
 
 // Iteration #8: Bonus
 const matrix = [
@@ -129,10 +165,26 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
-
-
-
+function greatestProduct(matrix) {
+  let highestNumber = 0;
+  let numberUp = 0;
+  let numberDown = 0;
+  let numberLeft = 0;
+  let numberRight = 0;
+  for (let y = 3; y < matrix.length - 3; y++) {
+    for (let x = 3; x < matrix.length - 3; x++) {
+      numberUp = matrix[y][x] * matrix[y - 1][x] * matrix[y - 2][x] * matrix[y - 3][x];
+      numberDown = matrix[y][x] * matrix[y + 1][x] * matrix[y + 2][x] * matrix[y + 3][x];
+      numberLeft = matrix[y][x] * matrix[y][x - 1] * matrix[y][x - 2] * matrix[y][x - 3];
+      numberRight = matrix[y][x] * matrix[y][x + 1] * matrix[y][x + 2] * matrix[y][x + 3];
+      highestNumber = numberUp > highestNumber ? numberUp : highestNumber;
+      highestNumber = numberDown > highestNumber ? numberDown : highestNumber;
+      highestNumber = numberLeft > highestNumber ? numberLeft : highestNumber;
+      highestNumber = numberRight > highestNumber ? numberRight : highestNumber;
+    }
+  }
+  return highestNumber;
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
